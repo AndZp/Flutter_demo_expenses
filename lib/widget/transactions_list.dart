@@ -5,13 +5,13 @@ import 'package:p1_expenses_planner/model/transaction.dart';
 class TransactionList extends StatelessWidget {
   final DateFormat format = DateFormat('kk:mm, dd.MM.yyyy');
   final List<Transaction> _transactions;
+  final Function(String txId) _deleteTransaction;
 
-  TransactionList(this._transactions);
+  TransactionList(this._transactions, this._deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
       child: _transactions.isEmpty
           ? Column(
               children: <Widget>[
@@ -54,6 +54,11 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat.yMMMd().format(_transactions[index].date),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => _deleteTransaction(_transactions[index].id)
                     ),
                   ),
                 );

@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Chart(_recentTransaction),
           Expanded(
-            child: TransactionList(_transactions),
+            child: TransactionList(_transactions, _deleteTransaction),
           ),
         ],
       ),
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: GestureDetector(
               onTap: () {},
-              child: NewTransaction(_addTransaction),
+              child: NewTransaction(_addTransaction, _deleteTransaction),
               behavior: HitTestBehavior.opaque,
             ),
           );
@@ -117,6 +117,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _transactions.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String transactionId) {
+    print("_deleteTransaction $transactionId");
+    setState(() {
+      _transactions.removeWhere((tx) {
+        return tx.id == transactionId;
+      });
     });
   }
 }
