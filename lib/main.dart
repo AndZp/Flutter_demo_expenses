@@ -25,11 +25,11 @@ class MyApp extends StatelessWidget {
               ),
         ),
         textTheme: ThemeData.light().textTheme.copyWith(
-              title: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
+            title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+                fontWeight: FontWeight.bold),
+            button: TextStyle(color: Colors.white)),
       ),
       home: MyHomePage(),
     );
@@ -107,12 +107,12 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void _addTransaction(String txTitle, double txAmount) {
+  void _addTransaction(String txTitle, double txAmount, DateTime date) {
     print("addTransaction $txTitle $txAmount");
     final newTx = Transaction(
         title: txTitle,
         amount: txAmount,
-        date: DateTime.now(),
+        date: date,
         id: DateTime.now().millisecondsSinceEpoch.toString());
 
     setState(() {
